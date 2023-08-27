@@ -1,0 +1,38 @@
+{
+  "name": "root",
+  "private": true,
+  "dependencies": {
+    "metro-config": "^0.78.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.15",
+    "lerna": "^7.1.5",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.3"
+  },
+  "scripts": {
+    "web": "lerna --scope=@commerce/web-app run dev --stream --",
+    "expo": "lerna --scope=@commerce/mobile-app run start --stream --",
+    "expo:android": "lerna --scope=@commerce/mobile-app run android --stream --",
+    "expo:ios": "lerna --scope=@commerce/mobile-app run ios --stream --",
+    "expo:web": "lerna --scope=@commerce/mobile-app run web --stream --",
+    "build": "lerna run build",
+    "build:web": "lerna --scope=@commerce/web-app run build --stream --",
+    "build:android": "lerna --scope=@commerce/mobile-app run build:android --stream --",
+    "build:ios": "lerna --scope=@commerce/mobile-app run build:ios --stream --",
+    "build:shared": "lerna --scope=@commerce/shared run build --stream --",
+    "test": "lerna run test",
+    "postinstall": "expo-yarn-workspaces postinstall"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**",
+      "**/expo",
+      "**/expo/**"
+    ]
+  }
+}
