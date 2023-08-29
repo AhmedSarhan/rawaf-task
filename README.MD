@@ -9,7 +9,3 @@
 
 - Yarn Worksapces
 - Vite
-
-### Setup guide
-
-https://adeesh.hashnode.dev/react-vite-monorepo-setup

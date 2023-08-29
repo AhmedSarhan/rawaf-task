@@ -2,13 +2,23 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "./packages/main",
-      "./packages/app1",
-      "./packages/app2",
-      "./packages/common"
+      "./packages/web",
+      "./packages/mobile",
+      "./packages/shared"
     ]
   },
   "scripts": {
-    "main": "yarn workspace main dev"
+    "main": "yarn workspace main dev",
+    "web": "yarn workspace @rawaf/web dev",
+    "mobile": "yarn workspace @rawaf/mobile start",
+    "shared": "yarn workspace @rawaf/shared dev",
+    "mobile:android": "yarn workspace @rawaf/mobile android",
+    "mobile:ios": "yarn workspace @rawaf/mobile ios",
+    "mobile:web": "yarn workspace @rawaf/mobile web",
+    "mobile:build": "yarn workspace @rawaf/mobile build",
+    "build:shared": "yarn workspace @rawaf/shared build",
+    "build:web": "yarn workspace @rawaf/web build",
+    "build:mobile": "yarn workspace @rawaf/mobile build",
+    "build": "yarn build:shared && yarn build:web && yarn build:@rawaf/mobile"
   }
 }
