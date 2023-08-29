@@ -19,6 +19,6 @@
     "build:shared": "yarn workspace @rawaf/shared build",
     "build:web": "yarn workspace @rawaf/web build",
     "build:mobile": "yarn workspace @rawaf/mobile build",
-    "build": "yarn build:shared && yarn build:web && yarn build:@rawaf/mobile"
+    "build": "yarn build:@rawaf/shared && yarn build:@rawaf/web && yarn build:@rawaf/mobile"
   }
 }

@@ -1,11 +1,12 @@
-import React from 'react'
-
+import React from "react";
+import clsx from "clsx";
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
-  text: string
+  text: string;
 }
-export const SharedButton = ({text, onClick}: Props) => {
+export const SharedButton = ({ text, onClick, className, ...rest }: Props) => {
   return (
-    <button onClick={onClick}>{text}</button>
-  )
-}
-
+    <button {...rest} onClick={onClick} className={clsx("", className)}>
+      {text}
+    </button>
+  );
+};
