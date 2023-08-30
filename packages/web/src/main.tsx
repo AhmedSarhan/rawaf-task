@@ -1,19 +1,16 @@
-import React, { Suspense, lazy } from 'react';
-import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import './index.css';
+import "./index.css";
 import { ReactQueryProvider } from "@rawaf/shared";
-const HomePage = lazy(() => import('./pages/home'));
-const LoginPage = lazy(() => import('./pages/login'));
-const RegisterPage = lazy(() => import('./pages/register'));
+import { ProtectedRoute } from "./shared/components/protected-route";
+import { AuthProvider } from "./modules/auth/provider";
+const HomePage = lazy(() => import("./pages/home"));
+const LoginPage = lazy(() => import("./pages/login"));
+const RegisterPage = lazy(() => import("./pages/register"));
 
-const ListingPage = lazy(() => import('./pages/listing'));
-
-
+const ListingPage = lazy(() => import("./pages/listing"));
 
 const router = createBrowserRouter([
   {
@@ -44,15 +41,19 @@ const router = createBrowserRouter([
     path: "/listing",
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ListingPage />
+        <ProtectedRoute>
+          <ListingPage />
+        </ProtectedRoute>
       </Suspense>
     ),
-  }
+  },
 ]);
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ReactQueryProvider>
-      <RouterProvider router={router} />
-    </ReactQueryProvider>
-  </React.StrictMode>,
+    <AuthProvider>
+      <ReactQueryProvider>
+        <RouterProvider router={router} />
+      </ReactQueryProvider>
+    </AuthProvider>
+  </React.StrictMode>
 );
