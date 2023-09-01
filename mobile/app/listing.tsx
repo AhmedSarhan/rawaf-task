@@ -10,12 +10,13 @@ import {
 import React, { useState } from "react";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import { useListing } from "../modules/listing/hooks/use-listing";
+import { useMovies } from "../modules/movies/hooks/use-listing";
+import { MovieCard } from "../modules/movies/components/movie-card";
 
 const ListingPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
-  const { data, isLoading, error } = useListing({
+  const { data, isLoading, error } = useMovies({
     page: 1,
     limit: 10,
     title: searchTitle,
@@ -57,60 +58,17 @@ const ListingPage = () => {
 
       {/* {error && <Text>{error?.message}</Text>} */}
 
-      {data?.length > 0 && (
+      {data?.length! > 0 && (
         <FlatList
           horizontal={true}
           data={data}
           renderItem={({ item }) => (
-            <View style={styles.card}>
-              <ImageBackground
-                source={{
-                  uri: item?.attributes?.posterImage?.original,
-                }}
-                resizeMode="cover"
-                style={styles.card_image}
-              ></ImageBackground>
-
-              <View style={{ padding: 10 }}>
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    marginBottom: 5,
-                  }}
-                >
-                  {item?.attributes?.titles?.en ||
-                    item?.attributes?.titles?.en_us ||
-                    item?.attributes?.titles?.en_jp ||
-                    "no title found"}
-                </Text>
-                <Text
-                  numberOfLines={3}
-                  style={{
-                    fontSize: 12,
-                    color: "gray",
-                  }}
-                >
-                  {item?.attributes?.description}
-                </Text>
-              </View>
-            </View>
+            <MovieCard movie={item} key={item.id} />
           )}
           keyExtractor={(item) => item.id}
         />
       )}
-      {/* <View style={styles.list}>
-        {data?.map((item: any) => (
-          <View key={item.id} style={styles.card}>
-            <Text>
-              {item?.attributes?.titles?.en ||
-                item?.attributes?.titles?.en_us ||
-                item?.attributes?.titles?.en_jp ||
-                "no title found"}
-            </Text>
-            <Text>{item?.attributes?.description}</Text>
-          </View>
-        ))}
-      </View> */}
+      
     </View>
   );
 };
@@ -130,23 +88,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderRadius: 5,
   },
-  card_image: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  card: {
-    width: 200,
-    height: 200,
-    backgroundColor: "white",
-    margin: 10,
-    borderRadius: 10,
-    shadowColor: "#746363",
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-    overflow: "hidden",
-  },
+  
 });

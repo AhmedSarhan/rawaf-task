@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-
+import { Movie } from "../types";
 
 
 export interface Filter {
@@ -7,7 +7,7 @@ export interface Filter {
   page: number;
   limit: number;
 }
-export const searchListing = async ({ filter }: { filter: Filter; }) => {
+export const searchMovies = async ({ filter }: { filter: Filter; }) => {
   const { page = 0, limit = 10, title } = filter;
   const url =
     process.env.EXPO_PUBLIC_API_URL +
@@ -29,13 +29,13 @@ export const searchListing = async ({ filter }: { filter: Filter; }) => {
 
 };
 
-export const useListing = ({ title, page, limit }: Filter) => {
+export const useMovies = ({ title, page, limit }: Filter) => {
   return useQuery({
-    queryKey: ["listing", title, page, limit],
-    queryFn: () => searchListing({ filter: { title, page, limit } }),
+    queryKey: ["movies", title, page, limit],
+    queryFn: () => searchMovies({ filter: { title, page, limit } }),
     select: (data) => {
       console.log('data', data);
-      return data.data;
+      return data.data as Movie[];
     },
     onError: (error) => {
       console.log('error', error);

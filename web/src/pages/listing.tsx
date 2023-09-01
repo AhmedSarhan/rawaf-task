@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Search } from "../shared/components/icons/search";
-import { useListing } from "../modules/listing/hooks/use-listing";
+import { useMovies } from "../modules/movies/hooks/use-listing";
+import { MoviesList } from "../modules/movies/components/movies-list";
 
 const ListingPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [search, setSearch] = useState("");
-  const { data, isLoading } = useListing({
+  const { data, isLoading } = useMovies({
     limit: 10,
     page: 0,
     title: search,
@@ -31,24 +32,7 @@ const ListingPage = () => {
         <div>Loading...</div>
       ) : (
         <div className="grid grid-cols-3 gap-8 p-3 mx-auto my-2">
-          {data?.map((item: any) => (
-            <div className="bg-white shadow-md rounded-lg border-none overflow-hidden text-ellipsis">
-              <img
-                src={item?.attributes?.posterImage?.original}
-                alt={item?.attributes?.titles?.en}
-                className="w-full h-[400px] object-cover"
-              />
-              <div className="p-6">
-                <h1 className="text-lg font-bold">
-                  {item?.attributes?.titles?.en ||
-                    item?.attributes?.titles?.en_us ||
-                    item?.attributes?.titles?.en_jp ||
-                    "no title found"}
-                </h1>
-                <p className="text-sm truncate line-clamp-3 ">{item?.attributes?.description}</p>
-              </div>
-            </div>
-          ))}
+          {data && <MoviesList movies={data} />}
         </div>
       )}
     </main>
