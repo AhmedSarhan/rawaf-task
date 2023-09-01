@@ -1,3 +1,9 @@
 const { createMetroConfiguration } = require('expo-yarn-workspaces');
 
-module.exports = createMetroConfiguration(__dirname);
+const config = createMetroConfiguration(__dirname);
+
+
+// Remove all console logs in production...
+config.transformer.minifierConfig.compress.drop_console = true;
+config.resolver.sourceExts = [...config.resolver.sourceExts, "mjs", "cjs"];
+module.exports = config;

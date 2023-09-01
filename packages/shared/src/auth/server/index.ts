@@ -17,10 +17,12 @@ export const loginAction = async ({ user, password }: AuthData) => {
   });
 
   if (response.status !== 200) {
-    throw new Error(JSON.stringify({
-      status: response.status,
-      message: response.statusText
-    }));
+    throw new Error(
+      JSON.stringify({
+        status: response.status,
+        message: response.statusText,
+      })
+    );
   }
 
   return response;
@@ -39,10 +41,12 @@ export const registerAction = async ({ user, password }: AuthData) => {
   });
 
   if (response.status !== 201) {
-    throw new Error(JSON.stringify({
-      status: response.status,
-      message: response.statusText
-    }));
+    throw new Error(
+      JSON.stringify({
+        status: response.status,
+        message: response.statusText,
+      })
+    );
   }
   return response;
 };

@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { CustomInput } from "../../../shared/components/custom-input";
 import { useNavigate } from "react-router-dom";
-import { loginAction, registerAction } from "../server";
+import { loginAction, registerAction } from "@rawaf/shared";
 import { useState } from "react";
 
 export type FormValues = {
